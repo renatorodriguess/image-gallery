@@ -2,11 +2,13 @@
 
 import { initialImageData } from '@/data'
 import { ImageGallery } from '@/types/global.types'
-import { DndContext, DragEndEvent, DragStartEvent, KeyboardSensor, PointerSensor, TouchSensor, closestCenter, useSensor, useSensors } from '@dnd-kit/core'
+import { DndContext, DragEndEvent, DragOverlay, DragStartEvent, KeyboardSensor, PointerSensor, TouchSensor, closestCenter, useSensor, useSensors } from '@dnd-kit/core'
 import { SortableContext, arrayMove, rectSortingStrategy, sortableKeyboardCoordinates } from '@dnd-kit/sortable'
 import { useState } from 'react'
 import ImageCard from '@/components/Cards/ImageCards'
 import AddImageCard from '@/components/Cards/AddImageCard'
+import ImageOverlayCard from '@/components/Cards/ImageOverlayCard'
+import Header from '@/components/Header/Header'
 
 export default function Home() {
   const [galleryData, setGalleryData] = useState(initialImageData);
@@ -64,13 +66,22 @@ export default function Home() {
     }
   };
 
+  const handleDelete = (selectedItems: ImageGallery[]) => {
+    // if galleryData.isSelected === true then filter out the selected items and return the rest
+    const newGalleryData = galleryData.filter(
+      (imageItem) => !selectedItems.includes(imageItem)
+    );
+
+    setGalleryData(newGalleryData);
+  };
+
   //dnd ends here
 
   return (
     <div className='min-h-screen'>
       <div className='flex -col items-center justify-center'>
         <div className='bg-white my-8 rounded-lg shadow max-w-5xl grid divide-y'>
-          <header className='text-2xl'>Showcase</header>
+          <Header onDelete={handleDelete} galleryData={galleryData}/>
 
           {/* dnd context*/}
             <DndContext
@@ -93,6 +104,13 @@ export default function Home() {
                   }
                 </SortableContext>
                 <AddImageCard setGalleryData={setGalleryData}/>
+
+                <DragOverlay adjustScale={true} wrapperElement='div'>
+                  {
+                    activeItem ? (<ImageOverlayCard className='absolute z-50 h-full w-full'slug={activeItem.slug}/>) : null
+                  }
+                  
+                </DragOverlay>
               </div>
             </DndContext>
 

@@ -1,5 +1,5 @@
 export interface ImageGallery {
-    id: number | string;
-    slug: string;
+    id: number | string,
+    slug: string,
     isSelected: boolean;
 }
