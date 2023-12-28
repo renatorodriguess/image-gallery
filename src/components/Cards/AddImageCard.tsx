@@ -43,7 +43,7 @@ const AddImageCard = ({setGalleryData}: AddImageCard) => {
         <Modal open={isModalOpen} handleClose={() => setIsModalOpen(false)}modalId="addImageModal">
             <form onSubmit={handleImageSubmit} className="relative py-12 px-6 bg-neutral-50 rounded w-[680px] maw-h-[95vh]">
                 <CloseIcon onClick={() => setIsModalOpen(false)} width={31} className="absolute top-4 right-4 cursor-pointer text-red-600 hover:text-red-700 transition-all"/>
-                <h2 className="text-2xl font-semibold text-center mb-8 ">Add Nova Imagem URl</h2>
+                <h2 className="text-2xl font-semibold text-center mb-8 ">URL Da Imagem</h2>
                 <input type="url" name="image-url" id="image-url" placeholder="https://exemplo.com/imagem.png"
                 className="w-full border border-gray-300  p-4 rounded focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent"/>
                 <div className="flex justify-end mt-4">

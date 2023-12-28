@@ -1,12 +1,18 @@
 module.exports = {
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'assets.example.com',
-        port: '',
-        pathname: '/account123/**',
-      },
+    domains: [
+      'pixabay.com',
+      'freepik.com',
+      'gratisography.com',
+      'burst.shopify.com',
+      'picjumbo.com',
+      'reshot.com',
+      'stocksnap.io',
+      'kaboompics.com',
+      'picography.co',
+      'isorepublic.com',
+      'images.unsplash.com',
+      'images.pexels.com'
     ],
   },
-}
+};

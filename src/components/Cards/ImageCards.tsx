@@ -44,7 +44,7 @@ const ImageCard = ({id, slug, isSelected, onClick, className=""}: ImageCard) => 
 
             {/* image block here */}
             <div className={twMerge("flex items-center justify-center h-full", isSelected && "opacity-60")}>
-                <Image width={300} height={300} src={slug} alt="" className="block object-cover w-full h-full"/>
+                <Image width={300} height={300} src={slug} alt="image" className="block object-cover w-full h-full"/>
             </div>
         </div>
     )
