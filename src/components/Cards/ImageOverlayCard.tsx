@@ -9,8 +9,7 @@ interface ImageCard extends Partial<ImageGallery>{
 }
 
 const ImageOverlayCard = ({ slug, className = "" }: ImageCard) => {
-  // Verifique se slug é uma string válida ou forneça um valor padrão
-  const imageSrc = slug || "caminho_do_valor_padrao.jpg";
+  const imageSrc = slug || "";
 
   return (
     <div className={twMerge("rounded-lg overflow-hidden border border-gray-300 group flex items-center justify-center h-full", className)}>

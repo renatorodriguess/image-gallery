@@ -22,8 +22,8 @@ const HeaderBlock = ({ onDelete, galleryData }: IHeaderProps) => {
             )}
             <span>
               {selectedItems.length > 1
-                ? `${selectedItems.length} Files Selected`
-                : `${selectedItems.length} File Selected`}
+                ? `${selectedItems.length} Arquivos Selecionados`
+                : `${selectedItems.length} Arquivos Selecionados`}
             </span>
           </h2>
           <button
@@ -34,8 +34,8 @@ const HeaderBlock = ({ onDelete, galleryData }: IHeaderProps) => {
                 : () => {}
             }
           >
-            {/* if one file then show Delete File otherwise Delete Files */}
-            {selectedItems.length > 1 ? `Delete Files` : "Delete File"}
+            
+            {selectedItems.length > 1 ? `Deletar Arquivos ` : "Deletar Arquivos"}
           </button>
         </>
       ) : (
