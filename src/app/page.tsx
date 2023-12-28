@@ -4,13 +4,30 @@ import { initialImageData } from '@/data'
 import { ImageGallery } from '@/types/global.types'
 import { DndContext, DragEndEvent, DragStartEvent, KeyboardSensor, PointerSensor, TouchSensor, closestCenter, useSensor, useSensors } from '@dnd-kit/core'
 import { SortableContext, arrayMove, rectSortingStrategy, sortableKeyboardCoordinates } from '@dnd-kit/sortable'
-import Image from 'next/image'
 import { useState } from 'react'
+import ImageCard from '@/components/Cards/ImageCards'
+import AddImageCard from '@/components/Cards/AddImageCard'
 
 export default function Home() {
-  const [galleryData, setgalleryData] = useState(initialImageData)
+  const [galleryData, setGalleryData] = useState(initialImageData);
+
+  // handleSelectImage
+  const handleSelectImage = (id: string | number) => {
+    const newGalleryData = galleryData.map((imageItem) => {
+      if(imageItem.id === id) {
+        return {
+          ...imageItem, isSelected: !imageItem.isSelected
+        }
+      }
+      return imageItem;
+    })
+    setGalleryData(newGalleryData)
+  }
+
+
 
   {/* dnd starts here*/}
+
   const [activeItem, setactiveItem] = useState<ImageGallery | null>(null)
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -39,7 +56,7 @@ export default function Home() {
     }
 
     if(active.id !== over.id) {
-      setgalleryData((items) => {
+      setGalleryData((items) => {
         const oldIndex = items.findIndex((item) => item.id === active.id)
         const newIndex = items.findIndex((item) => item.id === over.id)
         return arrayMove(items, oldIndex, newIndex)
@@ -66,16 +83,16 @@ export default function Home() {
                 <SortableContext  items={galleryData} strategy={rectSortingStrategy}>
                   {
                     galleryData.map((imageItem) => (
-                      <div key={imageItem.id}>
-                        <Image src={imageItem.slug} alt='' width={100} height={100}/>
-                      </div>
+                      <ImageCard  key={imageItem.id}
+                        id={imageItem.id}
+                        isSelected={imageItem.isSelected}
+                        slug={imageItem.slug}
+                        onClick={handleSelectImage}
+                      />
                     ))
                   }
-
-
                 </SortableContext>
-
-
+                <AddImageCard setGalleryData={setGalleryData}/>
               </div>
             </DndContext>
 
